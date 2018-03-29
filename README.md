@@ -3,7 +3,7 @@
 Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  
 
 <p align="center">
-<img  src="http://www.cis.rit.edu/~rmk6217/img/earthmapper.png">
+<img  src="http://www.cis.rit.edu/~rmk6217/img/earthmapper.png" width="200">
 </p>
 
 ## Description ##
