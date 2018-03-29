@@ -1,6 +1,6 @@
 # EarthMapper #
 
-Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  
+Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  We will work on adding more examples and better documentation.
 
 <p align="center">
 <img  src="http://www.cis.rit.edu/~rmk6217/img/earthmapper.png" width="200">
@@ -8,7 +8,28 @@ Project repository for EarthMapper.  This is a toolbox for the semantic segmenta
 
 ## Description ##
 
-TODO
+This is a classification pipeline from various projects that we have worked on over the past few years.  Currently available options include:
+
+### Pre-Processing ###
+* MinMaxScaler - Scale data (per-channel) between a given feature range (e.g., 0-1) 
+* StandardScaler - Scale data (per-channel) to zero-mean/unit-variance
+* PCA - Reduce dimensionality via principal component analysis
+* Normalize - Scale data using the per-channel L2 norm
+
+### Spatial-Spectral Feature Extraction ###
+* Stacked Convolutional Autoencoder (SCAE)
+* Stacked Multi-Loss Convolutional Autoencoder (SMCAE)
+
+### Classifiers ###
+* SVMWorkflow - Support vector machine with a given training/validation split
+* SVMCVWorkflow - Support vector machine that uses n-fold cross-validation to find optimal hyperparameters
+* RandomForestWorkflow - Random Forest classifier
+* MLP - Multi-layer Perceptron Neural Network classifier
+* SSMLP - Semi-supervised MLP Neural Network classifier
+
+### Post-Processors ###
+* Markov Random Field (MRF)
+* Fully-Connected Conditional Random Field (CRF)
 
 ## Dependencies ##
 * Python 3.5 (We recommend the [Anaconda Python Distribution](https://www.anaconda.com/download/))
