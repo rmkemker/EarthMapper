@@ -60,21 +60,25 @@ y_train, y_val = train_val_split(y, 15 , 35)
 fe = []
 target_bands = []
 target_fwhm = []
-for ds in ['aviris']:
+fe_sensors = ['aviris'] # This can include 'aviris', 'hyperion', and 'gliht'
+
+for ds in fe_sensors: 
     mat = read(fe_path + '/%s/%s_bands.mat' % (ds,fe_type))
     fe.append(SCAE(ckpt_path=fe_path + '/%s' % ds, nb_cae=5))
     target_bands.append(mat['bands'][0])
     target_fwhm.append(mat['fwhm'][0])
 
 #This pre-processes the data prior to passing it to a feature extractor
+#This can be a string or a ImagePreprocessor object
 pre_processor = ['StandardScaler', 'MinMaxScaler']
 
 #This pre-process the extracted features prior to passing it to a classifier
+#This can be a string or a ImagePreprocessor object
 feature_scaler = ['StandardScaler', 'MinMaxScaler', 
                   ImagePreprocessor(mode='PCA', PCA_components=0.99)]
 
-#Classifier - Linear SVM (probability=True required for CRF post-processor)
-clf = SVM_Workflow(probability=True)
+#Classifier - SVM-RBF (probability=True required for CRF post-processor)
+clf = SVM_Workflow(probability=True, kernel='rbf')
 
 #The classification pipeline
 pipe = Pipeline(pre_processor=pre_processor, 
