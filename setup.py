@@ -18,6 +18,9 @@ def main():
 
     #install matplotlib
     pip_install('matplotlib')
+    
+    #install scikit-learn
+    pip_install('sklearn')
 
     #install spectral python
     pip_install('spectral')
