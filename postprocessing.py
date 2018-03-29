@@ -6,7 +6,6 @@ import numpy as np
 import pydensecrf.densecrf as dcrf
 from pydensecrf.utils import create_pairwise_bilateral
 import pygco as gco
-from tqdm import tqdm
 from multiprocessing import Process, Queue
 
 class MRF(object):
@@ -23,7 +22,7 @@ class MRF(object):
                                      #scaled by multiplier and truncated 
 
   
-    def fit(self, X, y, idx, img):#img is unused here but is needed for the pipeline
+    def fit(self, X, y, idx):#img is unused here but is needed for the pipeline
         self.unaryEnergy = np.ascontiguousarray(-self.MULTIPLIER*np.log(X)).astype('int32') #energy=-log(probability)
         nClass = self.unaryEnergy.shape[2]
 
@@ -31,7 +30,7 @@ class MRF(object):
         best_score = 0.0
 
         print('Fitting Grid MRF...')
-        for i in tqdm(range(0,params.shape[0])):            
+        for i in range(params.shape[0]):            
             pairwiseEnergy = (self.MULTIPLIER*params[i]*(1-np.eye(nClass))).astype('int32') 
             out = gco.cut_simple(unary_cost=self.unaryEnergy,\
                   pairwise_cost=pairwiseEnergy,n_iter=self.INFERENCE_NITER,
@@ -46,7 +45,7 @@ class MRF(object):
         best_score = 0.0
         
         print('Finetuning Grid MRF...')
-        for i in tqdm(range(0,params.shape[0])):            
+        for i in range(params.shape[0]):            
             pairwiseEnergy = (self.MULTIPLIER*params[i]*(1-np.eye(nClass))).astype('int32') 
             out = gco.cut_simple(unary_cost=self.unaryEnergy,\
                   pairwise_cost=pairwiseEnergy,n_iter=self.INFERENCE_NITER,

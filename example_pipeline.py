@@ -60,7 +60,7 @@ y_train, y_val = train_val_split(y, 15 , 35)
 fe = []
 target_bands = []
 target_fwhm = []
-for ds in ['aviris','hyperion','gliht']:
+for ds in ['aviris']:
     mat = read(fe_path + '/%s/%s_bands.mat' % (ds,fe_type))
     fe.append(SCAE(ckpt_path=fe_path + '/%s' % ds, nb_cae=5))
     target_bands.append(mat['bands'][0])

@@ -9,7 +9,6 @@ Project repository for EarthMapper.  This is a toolbox for the semantic segmenta
 * [spectral python](http://www.spectralpython.net/)
 * [opencv](http://opencv.org/)
 * [gdal](http://www.gdal.org/)
-* [tqdm](https://pypi.python.org/pypi/tqdm)
 * [tensorflow](https://www.tensorflow.org/)
 
 ## Instructions ##
