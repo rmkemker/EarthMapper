@@ -1,6 +1,6 @@
-# README #
+# EarthMapper #
 
-Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.
+Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  Please stand-by - we are working to upload all of the relevant files over the next couple of days.
 
 ## Dependencies ##
 * Python 3.5
