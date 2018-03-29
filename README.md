@@ -1,6 +1,14 @@
 # EarthMapper #
 
-Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  Please stand-by - we are working to upload all of the relevant files over the next couple of days.
+Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  
+
+<p align="center">
+<img  src="http://www.cis.rit.edu/~rmk6217/img/earthmapper.png">
+</p>
+
+## Description ##
+
+TODO
 
 ## Dependencies ##
 * Python 3.5 (We recommend the [Anaconda Python Distribution](https://www.anaconda.com/download/))
@@ -22,7 +30,6 @@ $ python setup.py
 ```console
 $ python examples/example_pipeline.py
 ```
-
 ## Citations ##
 
 If you use our product, please cite:
@@ -35,3 +42,6 @@ If you use our product, please cite:
 * Ronald Kemker -  http://www.cis.rit.edu/~rmk6217/
 * Utsav Gewali - http://www.cis.rit.edu/~ubg9540/
 * Chris Kanan - http://www.chriskanan.com/
+
+## Also Check Out ##
+* RIT-18 Dataset - https://github.com/rmkemker/RIT-18
