@@ -35,7 +35,7 @@ def main():
     pip_install('git+git://github.com/amueller/gco_python')
 
 
-    #download and install datasets and pretrained folder    
+    #download and install datasets and pretrained filters    
     pretrained_filters = [['http://www.cis.rit.edu/~rmk6217/scae.zip', './feature_extraction/pretrained'],
                           ['http://www.cis.rit.edu/~rmk6217/smcae.zip', './feature_extraction/pretrained']]
     datasets = [['http://www.cis.rit.edu/~rmk6217/datasets.zip', './']]
