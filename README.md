@@ -9,10 +9,19 @@ Project repository for EarthMapper.  This is a toolbox for the semantic segmenta
 * [spectral python](http://www.spectralpython.net/)
 * [gdal](http://www.gdal.org/)
 * [tensorflow](https://www.tensorflow.org/)
+* [pydensecrf](https://github.com/lucasb-eyer/pydensecrf)
+* [gco_python](https://github.com/amueller/gco_python)
 
 ## Instructions ##
 
-TODO
+### Installation ###
+```console
+$ python setup.py
+```
+### Run an example ###
+```console
+$ python examples/example_pipeline.py
+```
 
 ## Citations ##
 
