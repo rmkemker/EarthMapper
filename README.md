@@ -3,11 +3,10 @@
 Project repository for EarthMapper.  This is a toolbox for the semantic segmentation of non-RGB (i.e., multispectral/hyperspectral) imagery.  Please stand-by - we are working to upload all of the relevant files over the next couple of days.
 
 ## Dependencies ##
-* Python 3.5
+* Python 3.5 (We recommend the [Anaconda Python Distribution](https://www.anaconda.com/download/#linux))
 * numpy, scipy, and matplotlib
 * [scikit-learn](http://scikit-learn.org/stable/)
 * [spectral python](http://www.spectralpython.net/)
-* [opencv](http://opencv.org/)
 * [gdal](http://www.gdal.org/)
 * [tensorflow](https://www.tensorflow.org/)
 

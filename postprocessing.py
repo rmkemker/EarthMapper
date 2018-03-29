@@ -4,9 +4,7 @@ Uses pydense (https://github.com/lucasb-eyer/pydensecrf) and python_gco (https:/
 """
 import numpy as np
 import pydensecrf.densecrf as dcrf
-from pydensecrf.utils import create_pairwise_bilateral
 import pygco as gco
-from multiprocessing import Process, Queue
 
 class MRF(object):
     """
@@ -110,7 +108,6 @@ class CRF(object):
         params = np.vstack([x.ravel() for x in params]).T
         
         best_score = 0.0
-
 
         print('Finetuning Fully-Connected CRF...')
         for i in range(params.shape[0]):
