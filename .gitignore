@@ -1,0 +1,8 @@
+*.hdf5
+*feature_extraction/pre_trained/*
+*checkpoint/
+*__pycache__
+*checkpoints*
+*checkpoint*
+*.png
+*.mat
