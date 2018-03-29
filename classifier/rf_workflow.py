@@ -52,7 +52,7 @@ class RandomForestWorkflow(BaseEstimator, ClassifierMixin):
         model = RandomForestClassifier(n_jobs=self.n_jobs,
                                        **self.scikit_args)        
     
-        params = {'n_estimators':np.arange(1,1000,50)}    
+        params = {'n_estimators':np.arange(1,1001,50)}    
         #Coarse search      
         gs = GridSearchCV(model, params, refit=False, n_jobs=self.n_jobs,  
                           verbose=self.verbose, cv=ps)

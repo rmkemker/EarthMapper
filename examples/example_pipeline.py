@@ -77,8 +77,8 @@ feature_scaler = ['StandardScaler', 'MinMaxScaler',
                   ImagePreprocessor(mode='PCA', PCA_components=0.99)]
 
 #Classifier - SVM-RBF (probability=True required for CRF post-processor)
-#clf = SVM_Workflow(probability=True, kernel='rbf')
-clf = RandomForestWorkflow()
+clf = SVM_Workflow(probability=True, kernel='rbf')
+#clf = RandomForestWorkflow()
 
 #The classification pipeline
 pipe = Pipeline(pre_processor=pre_processor, 

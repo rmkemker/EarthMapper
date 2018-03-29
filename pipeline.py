@@ -213,7 +213,6 @@ class Pipeline(BaseEstimator, ClassifierMixin):
                 X_val = X_val[self.pad[0][0]:-self.pad[0][1],
                               self.pad[1][0]:-self.pad[1][1]]                    
 
-
         print(X_train.shape)
         if len(self.feature_scaler):
             for feature_scaler_i in self.feature_scaler:
