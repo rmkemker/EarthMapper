@@ -1,6 +1,6 @@
 """
 setup.py
-
+Downloads and installs dependencies, datasets, and pretrained filters.
 """
 import pip
 import zipfile
