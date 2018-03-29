@@ -66,3 +66,4 @@ If you use our product, please cite:
 
 ## Also Check Out ##
 * RIT-18 Dataset - https://github.com/rmkemker/RIT-18
+* Machine and Neuromorphic Perception Laboratory - http://klab.cis.rit.edu/
