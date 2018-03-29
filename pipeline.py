@@ -30,7 +30,7 @@ class Pipeline(BaseEstimator, ClassifierMixin):
         classifier (obj): A classifier object.  
         pre_processor (str, list, obj, optional): Pre-process the image data.  
             It can either be a string ('MinMaxScaler', 'StandardScaler', 
-            'ZCAWhiten', 'GlobalContrastNormalization', 'PCA', 'Normalize'), an 
+            'PCA', 'Normalize','Exponential', 'ConeResponse, or 'ReLU'), an 
             ImagePreprocessor object, or a list containing one or more of the
             previous strings or ImagePre-processor objects.
         feature_extractor (obj, optional): A spatial-spectral feature extractor
@@ -57,7 +57,7 @@ class Pipeline(BaseEstimator, ClassifierMixin):
             ignored. (Default: False)
         **kwargs (optional): These are various input variables to the 
             pre-processor, feature_scaler, classifier, and post_processor 
-            class instances.
+            class instances.  This doesn't really work well...
             
     Attributes:
         
@@ -260,7 +260,7 @@ class Pipeline(BaseEstimator, ClassifierMixin):
             sh = feature2d.shape
             prob_map = self.classifier.predict_proba(feature2d.reshape(-1, sh[-1]))
             prob_map = prob_map.reshape(sh[0], sh[1], -1)
-            self.post_processor.fit(prob_map, y_val, val_idx)
+            self.post_processor.fit(prob_map+1e-50, y_val, val_idx)
             
                     
     def predict(self, X):
@@ -276,9 +276,6 @@ class Pipeline(BaseEstimator, ClassifierMixin):
                 on training and X
         """
 
-
-        
-        
         if len(self.pre_processor):
             for j in range(len(self.pre_processor)):
                 X = self.pre_processor[j].transform(X)
@@ -322,7 +319,7 @@ class Pipeline(BaseEstimator, ClassifierMixin):
                     
         if self.post_processor:
             prob = self.classifier.predict_proba(X)
-            pred = self.post_processor.predict(prob.reshape(sh[0], sh[1], -1))
+            pred = self.post_processor.predict(prob.reshape(sh[0], sh[1], -1)+1e-50)
             pred = pred.ravel()
         else:
             pred = self.classifier.predict(X)

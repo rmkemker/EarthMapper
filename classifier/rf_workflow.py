@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-
-
 @author: ubg9540
 """
 
@@ -19,7 +15,6 @@ class RandomForestWorkflow(BaseEstimator, ClassifierMixin):
     RandomForest (Classifier)
     
     Args:
-        n_trees (int, optional): Number of decision trees. (Default: 10)
         n_jobs (int, optional): Number of jobs to run in parallel for both fit 
             and predict. (Default: 8)
         verbosity (int, optional): Controls the verbosity of GridSearchCV: the 
@@ -29,8 +24,7 @@ class RandomForestWorkflow(BaseEstimator, ClassifierMixin):
         scikit_args (dict, optional)
     """
     
-    def __init__(self, n_trees=10, n_jobs=8, verbosity = 10, refit=True, scikit_args={}):
-        self.n_trees = n_trees
+    def __init__(self, n_jobs=8, verbosity = 10, refit=True, scikit_args={}):
         self.n_jobs = n_jobs
         self.verbose = verbosity
         self.refit = refit
@@ -55,27 +49,27 @@ class RandomForestWorkflow(BaseEstimator, ClassifierMixin):
         train_labels = np.append(train_labels , val_labels, axis=0)
         del val_data, val_labels
         
-        model = RandomForestClassifier(n_estimators=self.n_trees,
-                                       n_jobs=self.n_jobs,
+        model = RandomForestClassifier(n_jobs=self.n_jobs,
                                        **self.scikit_args)        
     
-        params = {'n_estimators':np.arange(1,100,5)}    
+        params = {'n_estimators':np.arange(1,1000,50)}    
         #Coarse search      
         gs = GridSearchCV(model, params, refit=False, n_jobs=self.n_jobs,  
                           verbose=self.verbose, cv=ps)
         gs.fit(train_data, train_labels)
         
         #Fine-Tune Search
-        params = {'n_estimators':np.arange(gs.best_params_['n_estimators']-5,
-                 gs.best_params_['n_estimators']+5)}    
+        params = {'n_estimators':np.arange(gs.best_params_['n_estimators']-50,
+                 gs.best_params_['n_estimators']+50)}    
         
         self.gs = GridSearchCV(model, params, refit=self.refit, n_jobs=self.n_jobs,  
                           verbose=self.verbose, cv=ps)
+        self.gs.fit(train_data, train_labels)
         
         if not self.refit:
             model.set_params(n_estimators=gs.best_params_['n_estimators'])
             self.gs = model
-            self.gs.fit(train_data[:sh[0]], train_labels[:sh[0]])
+            self.gs.fit(train_data[:sh[0]], train_labels[:sh[0]])         
         
 #        return self.gs.fit(train_data, train_labels)
                 

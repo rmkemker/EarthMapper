@@ -16,6 +16,7 @@ from preprocessing import ImagePreprocessor
 from utils.train_val_split import train_val_split
 from feature_extraction.scae import SCAE
 from classifier.svm_workflow import SVM_Workflow
+from classifier.rf_workflow import RandomForestWorkflow
 
 gpu_id = "0"
 dataset = 'ip' # dataset choices for this example are 'ip' and 'paviau'
@@ -41,10 +42,8 @@ elif dataset == 'ip':
     data_path = root + 'datasets/indian_pines/'
     X = read(data_path + 'indianpines_ds.tif').transpose(1,2,0)
     X = np.float32(X)
-        
     y = read(data_path + 'indianPinesGT.mat')['indian_pines_gt'] 
     y = y.ravel()
-    
     source_bands, source_fwhm = readENVIHeader(data_path + 'indianpines_ds_raw.hdr')
     num_classes = 16
     padding = ((4,3),(4,3),(0,0))
@@ -78,7 +77,8 @@ feature_scaler = ['StandardScaler', 'MinMaxScaler',
                   ImagePreprocessor(mode='PCA', PCA_components=0.99)]
 
 #Classifier - SVM-RBF (probability=True required for CRF post-processor)
-clf = SVM_Workflow(probability=True, kernel='rbf')
+#clf = SVM_Workflow(probability=True, kernel='rbf')
+clf = RandomForestWorkflow()
 
 #The classification pipeline
 pipe = Pipeline(pre_processor=pre_processor, 

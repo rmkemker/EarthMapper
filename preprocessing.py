@@ -68,51 +68,6 @@ class Exponential():
         self.fit(X)
         return self.transform(X)
     
-class ZCAWhiten():
-    """
-    Class used to scale data using ZCA whitening by fitting and transforming
-    Args:
-        epsilon (float): Default value is 0.1
-    """
-    def __init__(self, epsilon=0.1):
-        self.eps = epsilon
-        
-    def fit(self, X):       
-        """
-        Sets the scale based on the input data using StandardScaler
-        Args:
-            X (array): the data to be used to set the scale
-        """
-        self.sclr = StandardScaler(with_std=False)
-        X = self.sclr.fit_transform(X)
-                
-        X = X.T
-        sigma = np.dot(X, X.T)/X.shape[-1] 
-        U,S,V = np.linalg.svd(sigma) 
-        self.ZCAMatrix = np.dot(np.dot(U, 
-                            1.0/np.sqrt(np.diag(S) + self.eps)), U.T)                                    
-    def transform(self, X):
-        """
-        Transforms data based on the ZCAMatrix and the scale set in the fit 
-            function
-        Args:
-            X (array): the data to be transformed according to the scale
-        Returns: the transformed data
-        """
-        X = self.sclr.transform(X)
-        X = X.T
-        return np.dot(self.ZCAMatrix, X).T
-    
-    def fit_transform(self, X):
-        """
-        Performs both the fit and the transform methods on the same input data
-        Args:
-            X (array): the data to be used to set the scale then transformed
-        Returns: the result of transforming the X data after fitting it
-        """
-        self.fit(X)
-        return self.transform(X)
-
 class Normalize():
     """
     Class used to normalize and scale data by fitting and transforming it
@@ -159,65 +114,6 @@ class AveragePooling2D():
     def fit_transform(self , X):
         return self.transform(X)   
 
-class GlobalContrastNormalization():
-    """
-    Class used to scale data by fitting and transforming it
-    Args:
-        sqrt_bias (int): Default value is 10
-        epsilon (float): Default value is 1e-8
-        with_std (boolean): Default value is True
-        scale (int): Default value is 1
-    """
-    def __init__(self, sqrt_bias = 10, epsilon = 1e-8, with_std = True, scale=1):
-        self.sqrt_bias = sqrt_bias
-        self.eps= epsilon
-        self.scale = scale
-        self.with_std = with_std
-        
-    def fit(self, X):
-        """
-        Sets the scale based on the input data
-        Args:
-            X (array): the data to be used to set the scale
-        """
-        assert X.ndim == 2, "X.ndim must be 2"
-        self.scale = float(self.scale)
-        assert self.scale >= self.eps
-        
-        self.mean = X.mean(axis=1)
-        X = X - self.mean[:, np.newaxis]
-        
-        if self.with_std:
-            ddof = 1
-            if X.shape[1] == 1:
-                ddof = 0
-            self.normalizers = np.sqrt(self.sqrt_bias + X.var(axis=1, ddof=ddof)) / self.scale
-        else:
-            self.normalizers = np.sqrt(self.sqrt_bias + (X ** 2).sum(axis=1)) / self.scale
-        
-        self.normalizers[self.normalizers < self.eps] = 1.
-        
-    def transform(self, X):
-        """
-        Transforms data based on the scale set in the fit function
-        Args:
-            X (array): the data to be transformed according to the scale
-        Returns: the transformed data
-        """
-        X = X - self.mean[:, np.newaxis]
-        return X/self.normalizers[:, np.newaxis]
-    
-    def fit_transform(self , X):
-        """
-        Performs both the fit and the transform methods on the same input data
-        Args:
-            X (array): the data to be used to set the scale then transformed
-        Returns: the result of transforming the X data after fitting it
-        """
-        self.fit(X)
-        return self.transform(X)
-        
-
 class ImagePreprocessor():
     
     def __init__(self, mode='StandardScaler' , feature_range=[0,1], 
@@ -232,10 +128,6 @@ class ImagePreprocessor():
         elif self.mode == 'pca':
             self.sclr = PCA(n_components=PCA_components,whiten=whiten, 
                             svd_solver=svd_solver)
-        elif self.mode == 'globalcontrastnormalization':
-            self.sclr = GlobalContrastNormalization(with_std=with_std)
-        elif self.mode == 'zcawhiten':
-            self.sclr = ZCAWhiten()
         elif self.mode == 'normalize':
             self.sclr = Normalize()
         elif self.mode == 'exponential':
