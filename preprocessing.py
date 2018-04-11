@@ -74,8 +74,8 @@ class Normalize():
     Args:
         ord: Default value is None
     """
-    def __init__(self, ord=None):
-        self.ord = ord
+    def __init__(self, norm_order=None):
+        self.ord = norm_order
     def fit(self, X):
         """
         Sets the scale based on the input data; uses np.linalg.norm
@@ -104,9 +104,8 @@ class Normalize():
 
 class AveragePooling2D():
     
-    def __init__(self, pool_size=5, large=False):
+    def __init__(self, pool_size=5):
         self.pool_size = pool_size
-        self.large = large
     def fit(self, X):
         pass
     def transform(self, X):
@@ -118,7 +117,7 @@ class ImagePreprocessor():
     
     def __init__(self, mode='StandardScaler' , feature_range=[0,1], 
                  with_std=True, PCA_components=None, svd_solver='auto',
-                 ord=None, eps=0.05, whiten=True):
+                 norm_order=None, eps=0.05, whiten=True):
         self.mode = mode.lower()
         self.with_std = with_std
         if self.mode == 'standardscaler':
@@ -129,7 +128,7 @@ class ImagePreprocessor():
             self.sclr = PCA(n_components=PCA_components,whiten=whiten, 
                             svd_solver=svd_solver)
         elif self.mode == 'normalize':
-            self.sclr = Normalize()
+            self.sclr = Normalize(norm_order)
         elif self.mode == 'exponential':
             self.sclr = Exponential()
         elif self.mode == 'coneresponse':
@@ -162,21 +161,9 @@ class ImagePreprocessor():
             return self.sclr.data_min_, self.sclr.data_max_
         elif self.mode == 'pca':
             return self.sclr.components_
-        elif self.mode == 'globalcontrastnormalization':
-            return self.sclr.mean, self.sclr.normalizers
-        elif self.mode == 'zcawhiten':
-            return self.sclr.ZCAMatrix
         elif self.mode == 'normalize':
             return self.sclr.ord
         elif self.mode == 'exponential':
             return self.sclr.scale
         else:
             return None
-           
-if __name__ == '__main__':   
-    sclr = ImagePreprocessor('Exponential')
-    x = np.random.rand(100, 32,32, 3) * 255
-    sclr.fit(x)
-    f = sclr.transform(x)
-    f2 = sclr.fit_transform(x)
-    scale = sclr.get_params()

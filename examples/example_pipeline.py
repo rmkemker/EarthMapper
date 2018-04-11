@@ -15,7 +15,7 @@ from pipeline import Pipeline
 from preprocessing import ImagePreprocessor
 from utils.train_val_split import train_val_split
 from feature_extraction.scae import SCAE
-from classifier.svm_workflow import SVM_Workflow
+from classifier.svm_workflow import SVMWorkflow
 from classifier.rf_workflow import RandomForestWorkflow
 
 gpu_id = "0"
@@ -77,7 +77,7 @@ feature_scaler = ['StandardScaler', 'MinMaxScaler',
                   ImagePreprocessor(mode='PCA', PCA_components=0.99)]
 
 #Classifier - SVM-RBF (probability=True required for CRF post-processor)
-clf = SVM_Workflow(probability=True, kernel='rbf')
+clf = SVMWorkflow(probability=True, kernel='rbf')
 #clf = RandomForestWorkflow()
 
 #The classification pipeline

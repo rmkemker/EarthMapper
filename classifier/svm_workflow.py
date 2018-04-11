@@ -14,7 +14,7 @@ from sklearn.model_selection import GridSearchCV, PredefinedSplit
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 
-class SVM_Workflow(BaseEstimator, ClassifierMixin):
+class SVMWorkflow(BaseEstimator, ClassifierMixin):
     
     """
     Support Vector Machine (Classifier)
@@ -33,7 +33,7 @@ class SVM_Workflow(BaseEstimator, ClassifierMixin):
         scikit_args(dict, optional)
     """
     
-    def __init__(self, kernel='linear', n_jobs=8, verbosity = 10, 
+    def __init__(self, kernel='linear', n_jobs=8, verbosity = 0, 
                  probability=False, refit=True, scikit_args={}):
         self.kernel = kernel
         self.n_jobs = n_jobs

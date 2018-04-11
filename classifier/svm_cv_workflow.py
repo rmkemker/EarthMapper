@@ -14,10 +14,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import numpy as np
 
-class SVM_Workflow():
+class SVMWorkflow():
     
     def __init__(self, kernel='linear', n_jobs=8, probability=False,
-                 verbosity = 10,  cv=3, max_iter=1000, scikit_args={}):
+                 verbosity = 0,  cv=3, max_iter=1000, scikit_args={}):
         self.kernel = kernel
         self.n_jobs = n_jobs
         self.probability = probability
@@ -33,12 +33,12 @@ class SVM_Workflow():
             if self.probability:
                 clf = SVC(kernel='linear', class_weight='balanced',
                           random_state=6, multi_class='ovr',
-                          max_iter=1000, probability=self.probability,
+                          max_iter=self.max_iter, probability=self.probability,
                           **self.scikit_args)
             else:
                 clf = LinearSVC(class_weight='balanced', dual=False,
                                 random_state=6, multi_class='ovr',
-                                max_iter=1000, **self.scikit_args)
+                                max_iter=self.max_iter, **self.scikit_args)
             params = {'C': 2.0**np.arange(-9,16,2,dtype=np.float)}
 
         elif self.kernel == 'rbf':
