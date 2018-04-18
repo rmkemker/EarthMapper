@@ -10,7 +10,7 @@ from fileIO.utils import read
 import numpy as np
 from metrics import Metrics, Timer
 import os
-from utils.utils import readENVIHeader
+from utils.fileIO import readENVIHeader
 from pipeline import Pipeline
 from preprocessing import ImagePreprocessor, AveragePooling2D
 from utils.train_val_split import random_data_split, train_val_split
