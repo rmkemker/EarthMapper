@@ -11,7 +11,7 @@ http://www.gdal.org/
 import gdal
 from glob import glob
 import numpy as np
-from utils.utils import readENVIHeader, band_resample_hsi_cube
+from utils.utils import band_resample_hsi_cube
 
 class Hyperion():
     """
