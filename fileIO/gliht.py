@@ -46,7 +46,7 @@ class GLiHT():
 
     Notes
     -----
-	Ref: https://aviris.jpl.nasa.gov/
+	Ref: https://gliht.gsfc.nasa.gov/
     
     """      
     def __init__(self , directory, calibrate = True, bands=None, fwhm=None):

@@ -12,7 +12,6 @@ import numpy as np
 import pickle
 from scipy.io import loadmat, savemat
 from gdal import Open
-import subprocess
 
 def read(fName):
     """File reader
@@ -66,17 +65,3 @@ def write(fName, data):
     else:
         print('Unknown filename extension')
         return -1
-
-def bash(bash_cmd):
-    """Bash command operation
-    
-    Parameters
-    ----------
-    bash_cmd : string, the bash command to be sent to the terminal
-
-    Returns
-    -------
-    output : output of the input command
-    """  
-    process = subprocess.Popen(bash_cmd.split(), stdout=subprocess.PIPE)
-    return process.communicate()
