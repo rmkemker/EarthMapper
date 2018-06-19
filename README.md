@@ -67,5 +67,5 @@ If you use our product, please cite:
 * Chris Kanan - http://www.chriskanan.com/
 
 ## Also Check Out ##
-* EarthMapper Pipeline for Semantic Segmentation of Remote Sensing Imagery - https://github.com/rmkemker/EarthMapper
+* RIT-18 Dataset - https://github.com/rmkemker/RIT-18
 * Machine and Neuromorphic Perception Laboratory - http://klab.cis.rit.edu/
