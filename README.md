@@ -32,14 +32,15 @@ This is a classification pipeline from various projects that we have worked on o
 * Fully-Connected Conditional Random Field (CRF)
 
 ## Dependencies ##
-* Python 3.5 (We recommend the [Anaconda Python Distribution](https://www.anaconda.com/download/))
+* Python 3.5/3.7 (We recommend the [Anaconda Python Distribution](https://www.anaconda.com/download/))
 * numpy, scipy, and matplotlib
 * [scikit-learn](http://scikit-learn.org/stable/)
-* [spectral python](http://www.spectralpython.net/)
-* [gdal](http://www.gdal.org/)
-* [tensorflow](https://www.tensorflow.org/)
-* [pydensecrf](https://github.com/lucasb-eyer/pydensecrf)
+* [spectral python](http://www.spectralpython.net/) spectral 0.23.1
+* [gdal](http://www.gdal.org/) conda install conda-forge gdal==3.5.2
+* [tensorflow](https://www.tensorflow.org/) tensorflow 1.14 
+* [pydensecrf](https://github.com/lucasb-eyer/pydensecrf) pydensecrf 1.0
 * [gco_python](https://github.com/amueller/gco_python)
+  (pip instal pygco) (pygco 0.0.16)
 
 ## Instructions ##
 
